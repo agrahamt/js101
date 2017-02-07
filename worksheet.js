@@ -74,6 +74,7 @@ var isNegative = function(num) {
 }
 console.log("part 3, show if number is negative")
 console.log(isNegative(-3))
+console.log(isNegative(0))
 
 // Now, modify your sum function again, so that it 
 // will return null if any of the inputs is negative.
