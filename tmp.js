@@ -13,14 +13,17 @@ var assert = require('chai').assert
 var addOne = function(num) {
 	return num + 1
 }
-
+console.log('example problem num + 1')
+console.log(addOne(2))
 // Part 1
 
 // Fix the following code so doubleNum(2) wil equal 4. 
 
 var doubleNum = function(num) {
-	num * 2
+	return num * 2
 }
+console.log('Part 1, output of doubleNum(2)')
+console.log(doubleNum(2))
 
 /**
  * PART 2
@@ -28,7 +31,26 @@ var doubleNum = function(num) {
  * Write a function called sum that takes two numbers as
  * inputs and computes the sum of those two numbers.
  */
+var sum = function(num1, num2) {
+	return num1 + num2
+}
+console.log('Part 2, shows sum of two numbers (2 & 4)')
+console.log(sum(2,4))
 
+ // PART 2.5
+
+// modify your sum() function so that it will return null
+// if either of the inputs is not a number.
+var sum = function(num1, num2) {
+	if ((typeof num1 !== 'string') || (typeof num2 !== 'string')){
+    	return num1 + num2
+    }                                  
+     return null                                
+}
+console.log('Part 2.5 - shows sum of two numbers (2 & 4), returns null if either is not a number')
+console.log(sum(2,4))
+console.log(sum('hello',4))
+console.log(sum('hello','thing'))
 
 // PART 3
 
@@ -36,33 +58,68 @@ var doubleNum = function(num) {
 // as inputs and returns the average of the two. To avoid
 // repeating yourself, use your sum function inside 
 // of your average function.
-
+var average = function(num1, num2) {
+	return ((num1 + num2) / 2)
+}
+console.log('Part 3: average of two numbers')
+console.log(average(3,6))
 
 // Part 4
 
 // Write a function called isNegative that will tell 
 // whether a number is negative or not.
-
+var isNegative = function(num) {
+	if (num < 0) {console.log('This number is negative')
+	}
+    else {console.log('undefined')}
+}
+console.log("part 3, show if number is negative")
+console.log(isNegative(-3))
 
 // Now, modify your sum function again, so that it 
 // will return null if any of the inputs is negative.
 // To avoid repeating yourself, use your isNegative 
-// function inside your sum funciton ***
-
+// function inside your sum function ***
+var sum = function(num1, num2) {
+	sum = (num1 + num2)
+	return isNegative(sum)
+}
+console.log('Part 4b, shows whether the sum of two numbers is negative or not')
+console.log(sum(2,4))
 
 // Part 5
 
 // Write a function that will find the minimum of four 
 // input numbers. You can do it using nested if statements,
 // boolean operators, or both (but not neither).
-
+var minimum = function(num1,num2,num3,num4) {
+	if ((num1 < num2) && (num1 < num3) && (num1 < num4)){ 
+		return num1
+		}
+	else if((num2 < num1) && (num2 < num3) && (num2 < num4)){ 
+		return num2
+    }
+	else if((num3 < num1) && (num3 < num2) && (num3 < num4)){ 
+		return num3
+    }
+    {
+	return num4
+}}
+console.log('Part 5 - returns the minimum of four numbers')
+console.log(minimum(7,5,3,1))
 
 // Part 6
 
 // Using logical operators, write a function that will
 // return true if either input is a string, but not 
 // both or neither. 
-
+var justOneString = function(input1, input2) {
+	if ((typeof input1 === 'string') && (typeof input2 !== 'string')) {return true}
+	else if ((typeof input1 !== 'string') && (typeof input2 === 'string')) {return true}
+	else {return false}
+}
+console.log('Part 6 - true if only one of two inputs is a string')
+console.log(justOneString('hello',4))
 
 // HARD MODE
 
@@ -167,8 +224,18 @@ describe('Function', function() {
 			assert.equal(19, sum(8, 11))
 			assert.equal(104, sum(4, 100))
 			assert.equal(6176, sum(867, 5309))
+		})
+	})
+	describe('#sum()', function(){
+		it('should return null if either input is not a number', function(){
+			checkFuncBasics('sum',2)
 			assert.equal(null, sum('867', 5309))
 			assert.equal(null, sum(true, 5))
+		})
+	})
+	describe('#sum()', function(){
+		it('should return null if either input is negative', function(){
+			checkFuncBasics('sum',2)
 			assert.equal(null, sum(5,-5))
 		})
 	})
@@ -197,7 +264,7 @@ describe('Function', function() {
 		})
 	})
 	describe('#justOneString', function(){
-		it('should return true if one input is a string', function(){
+		it('should return true if exactly one input is a string', function(){
 			checkFuncBasics('justOneString',2)
 			assert.equal(true, justOneString('a',5))
 			assert.equal(true, justOneString(6,'dotron'))
